@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+   
+  </head>
+  <body>
+    <header>
+<h1> Mini Message <%=locals.title%></h1>
+<p><%=locals.subHeading%></p>
+<button  id="openModal">Add a message</button>
+    </header>
+    <div id="addModal">
+    <form  action="/new" method="post">
+      <p id ='close-btn'>&times</p>
+      <label for="name">
+          <input type="text" name ="name" id ="name" placeholder="enter your name..." required>
+      </label>
+      <label for="message">
+          <textarea name="text" id="message" cols="40" rows="10" placeholder ="Enter a message..."></textarea>
+      </label>
+      <input type="submit" value="add message">
+  </form>
+  </div>
+    <main>
+      <%if(locals.messages){ %>
+  <% messages.forEach((element)=> { %>
+        <section class ="card">
+          <h2><%= element.user%></h2>
+          <p><%= element.text%></p>
+          <p><%= element.added%></p>
+        </section>
+      <% }) %>
+      <% }%>
+    </main>
+    <footer>
+      <p>created by &copy <a href="">Nathan-Somto</a></p>
+    </footer>
+    <script>
+      const openModal = document.querySelector('#openModal');
+const addModal = document.querySelector('#addModal');
+const closeBtn = document.querySelector('#close-btn');
+console.log(openModal);
+openModal.addEventListener('click',()=>{
+    addModal.style.display = 'flex';
+});
+closeBtn.addEventListener('click', ()=>{
+    addModal.style.display ='none';
+});
+    </script>
+  </body>
+</html>
